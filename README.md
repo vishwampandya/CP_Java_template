@@ -22,3 +22,6 @@ or
     Add export PATH="your-dir:$PATH" to the last line of the file, where your-dir is the directory you want to add.
     Save the .bashrc file.
     Restart your terminal.
+    
+2) Give permision
+ chmod -R a+x CP_Java_template
