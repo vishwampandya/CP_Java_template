@@ -9,3 +9,8 @@
 2)add proper steps to set home dierectory path  
 
 ###Bugs
+
+
+###NOTE
+1) use this whenever delete the files from bin
+export PATH=$PATH:$HOME/bin/CP_Java_template
