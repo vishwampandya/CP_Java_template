@@ -52,10 +52,15 @@ touch $full_filename
 template_name="$(get_template_name $*)"
 
 
-sed 's/MainClass/'$filename'/g' $templates_path/$template_name > $full_filename
-
-
-#if properly then, otherwise not
+sed 's/MainClass/'$filename'/g' $templates_path/$template_name > $full_filename 2> error.txt
+return_sed_create=$?
+if [[ $return_sed_create == 0 ]]
+then
 echo "file created!"
+else
+rm $full_filename
+echo "failed to create file! please error file to check for errors."
+fi
 
+#what if file already created? -> ask want to proceed?
 
