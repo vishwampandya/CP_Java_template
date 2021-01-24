@@ -8,8 +8,8 @@ templates_path=$HOME/E/Projects/CP_Java_template-git/templates
 filename=$1
 
 get_template_name(){
-	temp_no=$1
-	no_of_arguments=$2
+	temp_no=$2
+	no_of_arguments=$#
 	
 	
 	if [[ $no_of_arguments == 1 ]] || [[ $temp_no == 4 ]]
@@ -32,8 +32,8 @@ get_template_name(){
 	echo $template_name
 }
 
-template_name="$(get_template_name $2 $#)"
 
+template_name="$(get_template_name $*)"
 
 
 full_filename=$filename".java"
