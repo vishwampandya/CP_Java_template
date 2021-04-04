@@ -64,21 +64,21 @@ full_filename=$filename".java"
 
 ################################################################################################
 ##################THIS PART NOT WORKING PROPERLY################################################
-:'
-check_if_file_exist_and_not_continue $path_to_project $full_filename
-donot_want_to_continue=$?
-if [[ donot_want_to_continue == 1  ]]
-then
-exit
-fi
-touch $full_filename
-'
+
+# check_if_file_exist_and_not_continue $path_to_project $full_filename
+# donot_want_to_continue=$?
+# if [[ donot_want_to_continue == 1  ]]
+# then
+# exit
+# fi
+# touch $full_filename
+
 ################################################################################################
 
 template_name="$(get_template_name $*)"
 
 
-sed 's/MainClass/'$filename'/g' $path_to_project/templates/$template_name > $full_filename 2> error.txt
+sed 's/MainClass/'$filename'/g' ./templates/$template_name > $full_filename 2> error.txt
 return_sed_create=$?
 if [[ $return_sed_create == 0 ]]
 then
