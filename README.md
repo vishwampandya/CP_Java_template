@@ -3,7 +3,11 @@
 2)Give sample input for all templates and proper comment it (all the types of inputs...)  
 3)set input as var for all templates (specifically buffer reader one)</br>  
 4)do something for default values if - no arguments passed , first passed but isnumber and vice versa , number out of range etc  
-5)add comments all over.
+5)add comments all over.  
+6)I have given permanent paths every where, try replacing it with relative paths. ex  ../abc instead of $path_to/fi.java  
+6.2)in above, go one step back and then into sub folder(ie use ../ to mention that we are using relatie path)  
+6.3)ex ../current_folder/subfolder/abc.txt  
+6.4)Or try using ./ representing the current dierectory
 ###For read me  
 1)added a templates_path variable for temporary and file execution  
 2)add proper steps to set home dierectory path  
