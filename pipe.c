@@ -63,7 +63,7 @@ int main(int argc,char* argv[]){
 
 	int byteRead;
 	char* temp;
-	char message[100],message2[100];
+	char message[100]="",message2[100]=""; //initialize so that last last there is no unwanted character due to buffer
 	
 	int fd1Gen[2];
 	pipe(fd1Gen);
