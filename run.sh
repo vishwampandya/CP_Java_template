@@ -2,7 +2,8 @@
 
 #path_to_project=$HOME/bin/CP_Java_template
 #below one for testing
-path_to_project=$HOME/E/Projects/CP_Java_template-git
+#path_to_project=$HOME/E/Projects/CP_Java_template-git
+path_to_project=./
 
 get_file_name(){
 	if [[ $# == 0 ]]

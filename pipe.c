@@ -4,6 +4,10 @@
 #include<stdlib.h>
 #include<sys/wait.h>
 #include <stdbool.h>
+#include<unistd.h>
+#include<pthread.h>
+#include<semaphore.h>
+#include<fcntl.h>
 
 #define READ 0
 #define WRITE 1
@@ -14,15 +18,39 @@
 	fdGen[] for M to read text of genIn and input to main prog and brute
 	
 	TO DO
-	#
-	#check for main pro and brute , if they go in infinite loop , firt thing put wait
 	#put wait at all the appropriate positions
 	#close all the fd at appropriate places
 	#can add to check if exit status , using macros
 */
 
 
-//This function is returning one extra character at the end(well it does not disturbs the flow)
+
+
+
+
+/****customized ctrl c handler*****/
+void printCustomMessage(){
+	printf("\n\n\n");
+	printf("*****************************\n");
+	printf("*                           *\n");
+	printf("*      Still there could    *\n");
+	printf("*       be a chance of      *\n");
+	printf("*     finding a testcase    *\n");
+	printf("*           Ahead           *\n");
+	printf("*                           *\n");
+	printf("*****************************\n");
+	
+}
+void (*oldHandler)();
+void ctrlCHandler(){
+	
+	printCustomMessage();
+	
+	int x = getpgid(getpid());
+	x = (-1)*(getpgid(getpid()));
+	kill(x,SIGKILL);
+}
+
 char* getInput(){
 	FILE *fp;
        int ch;
@@ -59,10 +87,12 @@ bool checkIfEqual(char* str1,char* str2){
 int main(int argc,char* argv[]){
 
 	
+
+	
 	int status;
 
 	int byteRead;
-	char* temp;
+	//char* temp;
 	char message[100]="",message2[100]=""; //initialize so that last last there is no unwanted character due to buffer
 	
 	int fd1Gen[2];
@@ -77,9 +107,12 @@ int main(int argc,char* argv[]){
 	int fdR2[2];
 	pipe(fdR2);
 	
+	
+	
 	if(fork()!=0){
+		oldHandler = signal(SIGINT,ctrlCHandler);
 		//main parent(M)
-		printf("Main Parent(M) \n");
+		//printf("Main Parent(M) \n");
 		
 		
 		close(fd1Gen[READ]);
@@ -99,10 +132,10 @@ int main(int argc,char* argv[]){
 		wait(&status);
 		
 		read(fdR1[READ],ans1,100);
-		printf("So the answer 1 is : %s\n",ans1);
+		//printf("So the answer 1 is : %s\n",ans1);
 		
 		read(fdR2[READ],ans2,100);
-		printf("So the answer 2 is : %s\n",ans2);
+		//printf("So the answer 2 is : %s\n",ans2);
 		
 		writeIntoFile("./TestingSolution/out1",ans1);
 		writeIntoFile("./TestingSolution/out2",ans2);
@@ -125,7 +158,7 @@ int main(int argc,char* argv[]){
 		
 		if(fork()!=0){
 			//main parent child(MC)
-			printf("Main Parent Child (MC)\n");
+			//printf("Main Parent Child (MC)\n");
 			
 			
 			int fd2[2];
@@ -139,12 +172,12 @@ int main(int argc,char* argv[]){
 			close(fdR1[READ]);
 			write(fdR1[WRITE],message2,100);
 			
-			printf("main sent : %s\n",message2);
+			//printf("main sent : %s\n",message2);
 			
 			
 			if(fork()==0){
 				//MCC2
-				printf("MCC2 \n");
+				//printf("MCC2 \n");
 				
 				//for whatever brute will output will go to mc
 				close(fd2[READ]);
@@ -155,7 +188,7 @@ int main(int argc,char* argv[]){
 				dup2(fd2Gen[READ],0);
 				
 				execlp("java","java",argv[2],NULL);
-				printf("I should not be printed");
+				//printf("I should not be printed");
 			}
 			else{
 				//main parent child(MC) continued....
@@ -166,14 +199,14 @@ int main(int argc,char* argv[]){
 				close(fdR2[READ]);
 				write(fdR2[WRITE],message,100);
 				
-				printf("brute sent : %s\n",message);	
+				//printf("brute sent : %s\n",message);	
 				
 			}
 			
 		}
 		else{
 			//MCC1
-			printf("MCC1 \n");
+			//printf("MCC1 \n");
 			
 	
 				
@@ -186,9 +219,11 @@ int main(int argc,char* argv[]){
 				dup2(fd1Gen[READ],0);
 				
 				execlp("java","java",argv[1],NULL);
-				printf("I should not be printed");
+				//printf("I should not be printed");
 				
 			
 		}
+		
+		
 	}
 }
