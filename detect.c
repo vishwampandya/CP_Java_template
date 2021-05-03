@@ -86,7 +86,9 @@ bool checkIfEqual(char* str1,char* str2){
 
 int main(int argc,char* argv[]){
 
-	
+	if(argc<2){
+		printf("please provide atleast two file names!!\n");
+	}
 
 	
 	int status;

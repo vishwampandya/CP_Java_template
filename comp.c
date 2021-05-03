@@ -11,14 +11,24 @@
 
 
 void help(){
-	printf("**********************USAGE********************************\n");
+	printf("\n*******************************************USAGE************************************************************\n");
 	
 	printf("\tDescription : \n");
-	printf("\t\t-help \n");
-	printf("\t\t-template \n");
-	printf("\t\t-detect \n");
+	printf("\n\tThis project is an complete setup that one can use for its competitve programming. \n\n\n");
+	printf("\t\t-help \t[ gets program description and usage ]\n\n\n");
 	
-	printf("***********************************************************\n");
+	
+	printf("\t\t-template \t[ Creates desired template ]\n\n");
+	printf("\t\t\t-template <newfilename> <template number(1-4)>\n");
+	printf("\t\t\t\t1 => Reader class        ^ ...fastest\n");
+	printf("\t\t\t\t2 => FastReader class    |\n");
+	printf("\t\t\t\t3 => BufferReader class  |\n");
+	printf("\t\t\t\t4 => Scanner class       |...slowest\n");
+	
+	printf("\n\n\n\t\t-detect \t[ Finds mismatching testCase between your bruteForce and optimized solution ]\n\n");
+	printf("\t\t\t-detect <bruteForce filename> <optimized filename>\n");
+	
+	printf("\n*******************************************************************************************************************\n");
 }
 
 void checkValidArguments(int argc){
