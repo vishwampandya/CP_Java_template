@@ -79,7 +79,7 @@ full_filename=$filename".java"
 template_name="$(get_template_name $*)"
 
 
-sed 's/MainClass/'$filename'/g' ./templates/$template_name > $full_filename 2> error.txt
+sed 's/MainClass/'$filename'/g' ./templates/$template_name > $full_filename 2> ./TextFiles/error.txt
 return_sed_create=$?
 if [[ $return_sed_create == 0 ]]
 then

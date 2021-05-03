@@ -2,7 +2,7 @@ for((i = 1; ; ++i)); do
     echo "Checking Testcase : "$i
     ./TestingSolution/gen $i > ./TestingSolution/genIn
      ./detect.out $1 $2
-     diff -w ./TestingSolution/out1 ./TestingSolution/out2 > diffCommandOutput.txt || break
+     diff -w ./TestingSolution/out1 ./TestingSolution/out2 > ./TextFiles/diffCommandOutput.txt || break
     
 done
 
